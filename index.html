@@ -1,204 +1,127 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, Search, Facebook, Twitter, Instagram, Calendar, ArrowRight, X } from 'lucide-react';
+import React, { useState } from 'react';
+import { Calendar, Search, Menu, X } from 'lucide-react';
 
-const AJEWebsite = () => {
+const ModernAJEHomepage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Dados do site
   const events = [
-    { date: '13 FEV', title: 'HAPPY AJE', location: 'Manaus, AM' },
-    { date: '19 FEV', title: 'ENJE BRASÍLIA', location: 'Brasília, DF' },
-    { date: '27 FEV', title: 'ALMOÇO DE NEGÓCIOS', location: 'Manaus, AM' },
-    { date: '12 MAR', title: 'ENCONTRO EMPRESARIAL', location: 'Manaus, AM' }
+    { date: '13 FEV', title: 'HAPPY AJE' },
+    { date: '19 FEV', title: 'ENJE BRASÍLIA' },
+    { date: '27 FEV', title: 'ALMOÇO DE NEGÓCIOS' },
+    { date: '12 MAR', title: 'ENCONTRO EMPRESARIAL' }
   ];
-
-  const stats = [
-    { value: '500+', label: 'Associados' },
-    { value: '50+', label: 'Eventos Anuais' },
-    { value: '15+', label: 'Anos de História' },
-    { value: '100+', label: 'Parcerias' }
-  ];
-
-  const navigation = ['INÍCIO', 'SOBRE', 'ESTRUTURA', 'ASSOCIADOS'];
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Barra Superior */}
-      <div className="bg-gray-900 text-white py-2">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center">
-            <div className="text-sm">
-              07/02/2025 | Últimos: <a href="#" className="text-green-400 hover:text-green-300 transition-colors">Conheça a AJE</a>
-            </div>
-            <div className="flex space-x-4">
-              <a href="#" className="hover:text-green-400 transition-colors duration-300"><Facebook size={16} /></a>
-              <a href="#" className="hover:text-green-400 transition-colors duration-300"><Twitter size={16} /></a>
-              <a href="#" className="hover:text-green-400 transition-colors duration-300"><Instagram size={16} /></a>
-            </div>
+      {/* Top Bar */}
+      <div className="bg-gray-50 py-2">
+        <div className="container mx-auto px-4 flex justify-between items-center">
+          <span className="text-gray-600 text-sm">07/02/2025</span>
+          <div className="flex gap-4">
+            <a href="#" className="text-gray-600 hover:text-green-600">Facebook</a>
+            <a href="#" className="text-gray-600 hover:text-green-600">Twitter</a>
+            <a href="#" className="text-gray-600 hover:text-green-600">Instagram</a>
           </div>
         </div>
       </div>
 
-      {/* Header Principal */}
-      <header className={`sticky top-0 z-40 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white'
-      }`}>
+      {/* Main Navigation */}
+      <nav className="bg-white shadow-lg">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex justify-between items-center h-20">
             <div className="flex items-center">
-              <img src="/api/placeholder/160/60" alt="AJE Amazonas Logo" className="h-12 transition-transform duration-300 hover:scale-105" />
+              <img src="/api/placeholder/150/80" alt="AJE Logo" className="h-12" />
+              <span className="ml-2 text-green-600 font-medium">AMAZONAS</span>
             </div>
-            
-            <nav className="hidden lg:flex items-center space-x-8">
-              {navigation.map((item) => (
-                <a
-                  key={item}
-                  href="#"
-                  className="text-gray-700 hover:text-green-600 transition-colors duration-300 relative group"
-                >
-                  {item}
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-green-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-                </a>
-              ))}
-            </nav>
 
-            <div className="hidden lg:flex items-center space-x-4">
-              <button className="px-6 py-2 text-green-600 border border-green-600 rounded-full hover:bg-green-600 hover:text-white transition-all duration-300">
-                Login
-              </button>
-              <button className="px-6 py-2 bg-green-600 text-white rounded-full hover:bg-green-700 transition-all duration-300 transform hover:scale-105 flex items-center">
-                Associe-se <ArrowRight size={16} className="ml-2" />
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              <a href="#" className="text-gray-600 hover:text-green-600">INÍCIO</a>
+              <a href="#" className="text-gray-600 hover:text-green-600">SOBRE</a>
+              <a href="#" className="text-gray-600 hover:text-green-600">ESTRUTURA</a>
+              <a href="#" className="text-gray-600 hover:text-green-600">ASSOCIADOS</a>
+              <button className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700">
+                Login do Associado
               </button>
             </div>
 
-            <button 
-              className="lg:hidden p-2 hover:bg-gray-100 rounded-full transition-colors duration-300"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                {isMenuOpen ? <X /> : <Menu />}
+              </button>
+            </div>
           </div>
         </div>
-      </header>
+      </nav>
 
-      {/* Menu Mobile */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-30 bg-white/95 backdrop-blur-lg transform transition-transform duration-300">
-          <div className="container mx-auto px-4 py-6">
-            <nav className="flex flex-col space-y-6">
-              {navigation.map((item) => (
-                <a
-                  key={item}
-                  href="#"
-                  className="text-xl text-gray-800 hover:text-green-600 transition-colors duration-300 flex items-center justify-between"
-                >
-                  {item}
-                  <ArrowRight size={16} className="text-green-600" />
-                </a>
-              ))}
-              <div className="pt-6 space-y-4">
-                <button className="w-full px-6 py-3 text-green-600 border border-green-600 rounded-full hover:bg-green-600 hover:text-white transition-all duration-300">
-                  Login
-                </button>
-                <button className="w-full px-6 py-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition-all duration-300 flex items-center justify-center">
-                  Associe-se <ArrowRight size={16} className="ml-2" />
-                </button>
-              </div>
-            </nav>
+        <div className="md:hidden bg-white shadow-lg">
+          <div className="px-4 py-4 space-y-4">
+            <a href="#" className="block text-gray-600">INÍCIO</a>
+            <a href="#" className="block text-gray-600">SOBRE</a>
+            <a href="#" className="block text-gray-600">ESTRUTURA</a>
+            <a href="#" className="block text-gray-600">ASSOCIADOS</a>
+            <button className="w-full bg-green-600 text-white px-6 py-2 rounded-lg">
+              Login do Associado
+            </button>
           </div>
         </div>
       )}
 
-      {/* Seção Hero */}
-      <section className="relative py-24 bg-gradient-to-br from-green-600 via-green-700 to-green-800 overflow-hidden">
-        <div className="absolute inset-0 bg-pattern opacity-10"></div>
-        <div className="container mx-auto px-4 relative">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
-              Propõe. Identifica. <span className="text-yellow-400">Aje.</span>
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-green-100 leading-relaxed">
-              Fomentando o empreendedorismo e inovação no Amazonas
+      {/* Hero Section */}
+      <div className="bg-gradient-to-r from-green-600 to-green-700 text-white py-20">
+        <div className="container mx-auto px-4">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">Propõe. Identifica. Aje.</h1>
+          <p className="text-xl md:text-2xl max-w-2xl">
+            Fomentando o empreendedorismo e inovação no estado do Amazonas.
+          </p>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-16">
+        <div className="grid md:grid-cols-3 gap-8">
+          {/* About Section */}
+          <div className="md:col-span-2 space-y-6">
+            <h2 className="text-3xl font-bold text-gray-800 mb-6">
+              Sobre a AJE-AM
+            </h2>
+            <p className="text-gray-600 leading-relaxed">
+              A Associação dos Jovens Empresários e Empreendedores do Amazonas (AJE-AM) é uma entidade civil
+              de direito privado, sem fins lucrativos, fundada para representar, apoiar e fomentar o
+              empreendedorismo no estado do Amazonas.
             </p>
-            <button className="px-8 py-3 bg-white text-green-600 rounded-full hover:bg-green-50 transition-all duration-300 transform hover:scale-105 flex items-center group">
-              Saiba mais 
-              <ArrowRight size={16} className="ml-2 transform group-hover:translate-x-1 transition-transform duration-300" />
-            </button>
+            <p className="text-gray-600 leading-relaxed">
+              Com sede em Manaus, a AJE-AM atua como um ponto de referência para empreendedores, oferecendo
+              suporte técnico, consultoria empresarial, formação de lideranças e organização de eventos que
+              fortalecem a cultura empreendedora no estado.
+            </p>
           </div>
-        </div>
-      </section>
 
-      {/* Estatísticas */}
-      <section className="py-16 -mt-16 relative z-10">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div 
-                key={index}
-                className="bg-white rounded-xl p-6 shadow-lg transform hover:-translate-y-2 transition-all duration-300"
-              >
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-green-600 mb-2">{stat.value}</div>
-                  <div className="text-gray-600">{stat.label}</div>
+          {/* Events Section */}
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <div className="flex items-center gap-2 mb-6">
+              <Calendar className="text-green-600" />
+              <h3 className="text-xl font-bold text-gray-800">Eventos Agendados</h3>
+            </div>
+            <div className="space-y-4">
+              {events.map((event, index) => (
+                <div key={index} className="flex items-center gap-4 p-3 bg-white rounded-lg shadow-sm">
+                  <div className="text-center">
+                    <div className="text-green-600 font-bold">{event.date.split(' ')[0]}</div>
+                    <div className="text-sm text-gray-500">{event.date.split(' ')[1]}</div>
+                  </div>
+                  <div className="font-medium text-gray-800">{event.title}</div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Conteúdo Principal */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">Sobre a AJE Amazonas</h2>
-            <div className="prose max-w-none text-gray-600 space-y-6">
-              <p>
-                A Associação dos Jovens Empresários e Empreendedores do Amazonas (AJE-AM) é uma entidade civil de direito privado, sem fins lucrativos, fundada para representar, apoiar e fomentar o empreendedorismo no estado do Amazonas.
-              </p>
-              <p>
-                Seguindo as diretrizes da Confederação Nacional dos Jovens Empresários (CONAJE), a AJE-AM promove a integração, educação e desenvolvimento de jovens empresários comprometidos com a ética, a cidadania e a livre iniciativa.
-              </p>
+              ))}
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Eventos */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8">Próximos Eventos</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {events.map((event, index) => (
-              <div 
-                key={index}
-                className="bg-white rounded-xl p-6 shadow hover:shadow-xl transition-shadow duration-300"
-              >
-                <div className="text-center p-4 bg-green-50 rounded-lg mb-4">
-                  <div className="text-2xl font-bold text-green-600">{event.date.split(' ')[0]}</div>
-                  <div className="text-sm text-green-600">{event.date.split(' ')[1]}</div>
-                </div>
-                <h3 className="font-semibold text-gray-800 mb-2">{event.title}</h3>
-                <p className="text-gray-500 text-sm mb-4">{event.location}</p>
-                <button className="w-full px-4 py-2 text-green-600 border border-green-600 rounded-lg hover:bg-green-600 hover:text-white transition-colors duration-300">
-                  Inscrever-se
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
   );
 };
 
-export default AJEWebsite;
+export default ModernAJEHomepage;
